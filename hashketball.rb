@@ -238,6 +238,29 @@ def player_stats(name)
   return return_stats
 end
 
+def big_shoe_rebounds
+  biggest_shoe = 0
+  rebounds = 0
+  game_hash.each do |locale, team|
+    team.each do |key, value|
+      if key == :players
+        value.each do |player, stat|
+          stat.each do |attribute, total|
+            if attribute == :shoe && biggest_shoe < total
+              biggest_shoe = total
+              stat.each do |attribute2, total2|
+                if attribute2 == :rebounds
+                  rebounds = total2
+                end
+              end 
+            end
+          end
+        end
+      end
+    end
+  end
+  return rebounds
+end
 
 
 
